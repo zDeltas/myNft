@@ -7,17 +7,34 @@ import {AngularFireModule} from "@angular/fire/compat";
 import {environment} from "../environments/environment";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import {AngularFireAuthModule} from "@angular/fire/compat/auth";
+import { LoginComponent } from './view/login/login.component';
+import { RegisterComponent } from './view/register/register.component';
+import {SharedModule} from "./components/components.module";
+import {MatButtonModule} from "@angular/material/button";
+import { AppRoutingModule } from './app-routing.module';
+import { HomeComponent } from './view/home/home.component';
+import firebase from "firebase/compat/app";
+import {RouterOutlet} from "@angular/router";
+
+firebase.initializeApp(environment.firebaseConfig);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    RegisterComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    SharedModule,
+    MatButtonModule,
+    AppRoutingModule,
+    RouterOutlet
   ],
   providers: [],
   bootstrap: [AppComponent]

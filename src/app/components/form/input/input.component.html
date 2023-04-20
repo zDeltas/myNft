@@ -1,0 +1,11 @@
+<ng-template [ngIf]="formControl && show">
+  <mat-form-field appearance="standard" floatLabel="always" [hideRequiredMarker]="hideRequiredMark">
+    <mat-label>{{ label }}</mat-label>
+    <input
+      matInput
+      [placeholder]="placeholder"
+      [formControl]="formControl"
+      [required]="isRequired"
+      [type]="type" />
+  </mat-form-field>
+</ng-template>
