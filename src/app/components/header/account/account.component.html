@@ -3,7 +3,8 @@
     <mat-icon>account_circle</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="profile()">Voir mon profil</button>
+    <button mat-menu-item routerLink="admin" *ngIf="this.authService.isAdmin">Administration</button>
+    <button mat-menu-item routerLink="my-profile">Voir mon profil</button>
     <button mat-menu-item (click)="logout()">Se deconnecter</button>
   </mat-menu>
 </ng-container>

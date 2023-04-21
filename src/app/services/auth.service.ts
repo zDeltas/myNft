@@ -12,7 +12,7 @@ export class AuthService {
   private isLogged = new BehaviorSubject<boolean>(false);
   public $isLogged = this.isLogged.asObservable();
   public currentUser: firebase.User | null = null;
-
+  public isAdmin: boolean = false;
   token: BehaviorSubject<string | null>;
 
   constructor(private afs: AngularFirestore, private afa: AngularFireAuth) {
@@ -21,6 +21,7 @@ export class AuthService {
     this.afa.onAuthStateChanged(user => {
       if (user) {
         this.currentUser = user;
+        this.checkIsAdmin();
         this.isLogged.next(true);
       } else {
         this.currentUser = null;
@@ -72,6 +73,7 @@ export class AuthService {
             .then(currentUser => {
               this.token.next(currentUser.user!.refreshToken);
               this.currentUser = currentUser.user;
+              this.checkIsAdmin();
               resolve();
             })
             .catch(reason => {
@@ -105,5 +107,15 @@ export class AuthService {
         resolve();
       });
     });
+  }
+
+  checkIsAdmin() {
+    this.afs
+      .collection('users')
+      .doc(this.currentUser?.uid)
+      .get()
+      .subscribe(value => {
+        this.isAdmin = (value.data() as User).isAdmin;
+      });
   }
 }

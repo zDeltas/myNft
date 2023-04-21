@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { InputComponent } from './form/input/input.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatInputModule } from '@angular/material/input';
 import { AsyncPipe, NgIf } from "@angular/common";
 import { MatIconModule } from '@angular/material/icon';
@@ -9,9 +9,12 @@ import { RouterLink, RouterLinkWithHref } from "@angular/router";
 import { AccountComponent } from './header/account/account.component';
 import { MatButtonModule } from "@angular/material/button";
 import { MatMenuModule } from "@angular/material/menu";
+import { EditUserDialogComponent } from './edit-user-dialog/edit-user-dialog.component';
+import { MatDialogModule } from "@angular/material/dialog";
+import { MatCheckboxModule } from "@angular/material/checkbox";
 
 @NgModule({
-  declarations: [InputComponent, HeaderComponent, AccountComponent],
+  declarations: [InputComponent, HeaderComponent, AccountComponent, EditUserDialogComponent],
   imports: [
     ReactiveFormsModule,
     MatInputModule,
@@ -22,6 +25,9 @@ import { MatMenuModule } from "@angular/material/menu";
     AsyncPipe,
     RouterLink,
     MatMenuModule,
+    MatDialogModule,
+    MatCheckboxModule,
+    FormsModule,
   ],
   exports: [InputComponent, HeaderComponent],
 })

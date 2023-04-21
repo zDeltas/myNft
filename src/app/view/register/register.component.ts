@@ -38,13 +38,14 @@ export class RegisterComponent {
       this.registerFormControls.email.value,
       this.registerFormControls.password.value,
       this.registerFormControls.firstName.value,
-      this.registerFormControls.lastName.value
+      this.registerFormControls.lastName.value,
+      false
     );
 
     this.authService
       .register(user)
       .then(() => {
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['home']);
       })
       .catch(reason => {
         this.alerts.push(reason);

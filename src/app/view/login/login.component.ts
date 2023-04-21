@@ -34,7 +34,7 @@ export class LoginComponent {
     this.authService
       .login(this.loginFormControls.email.value, this.loginFormControls.password.value)
       .then(() => {
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['home']);
       })
       .catch(reason => {
         this.alerts.push(reason);

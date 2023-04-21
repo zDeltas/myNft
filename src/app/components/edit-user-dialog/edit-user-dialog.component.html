@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="header">
+    <span class="title">Edition d'un utilisateur</span>
+    <button class="close-button" mat-icon-button mat-dialog-close>
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <form [formGroup]="editUserForm" (ngSubmit)="save()">
+    <mat-dialog-content>
+      <uic-input
+        [ctrl]="editUserFormControls.email"
+        label="Email"
+        placeholder="entrer votre email"></uic-input>
+      <uic-input
+        [ctrl]="editUserFormControls.lastName"
+        label="Nom"
+        placeholder="entrer votre nom"></uic-input>
+      <uic-input
+        [ctrl]="editUserFormControls.firstName"
+        label="Prénom"
+        placeholder="entrer votre prénom"></uic-input>
+      <mat-checkbox [formControl]="editUserFormControls.isAdmin">is admin ?</mat-checkbox>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close>Cancel</button>
+      <button mat-button type="submit">Enregistrer</button>
+    </mat-dialog-actions>
+  </form>
+</div>
