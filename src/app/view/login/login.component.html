@@ -1,1 +1,26 @@
-<p>login works!</p>
+<div class="container">
+  <div class="form-container">
+    <div class="alert-container" *ngFor="let alert of alerts; let index = index">
+      <span>{{ alert }}</span>
+      <button mat-icon-button (click)="removeAlert(index)">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <form [ngFormOptions]="loginForm" (ngSubmit)="submit()">
+      <uic-input
+        [ctrl]="loginFormControls.email"
+        label="Email"
+        placeholder="entrer votre email"></uic-input>
+      <uic-input
+        [ctrl]="loginFormControls.password"
+        label="Mot de passe"
+        placeholder="entrer votre mot de passe"
+        type="password"></uic-input>
+      <div class="actions-container">
+        <a mat-button routerLink="/register">Pas encore inscrit ?</a>
+        <button mat-button type="submit">Se connecter</button>
+      </div>
+    </form>
+  </div>
+</div>

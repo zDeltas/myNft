@@ -1,20 +1,15 @@
 export class User {
-  private _id: string;
+  private _id: string | undefined;
   private _email: string;
   private _password: string;
   private _firstName: string;
   private _lastName: string;
 
-  constructor(id: string, email: string, password: string, firstName: string, lastName: string) {
-    this._id = id;
+  constructor(email: string, password: string, firstName: string, lastName: string) {
     this._email = email;
     this._password = password;
     this._firstName = firstName;
     this._lastName = lastName;
-  }
-
-  get id(): string {
-    return this._id;
   }
 
   set id(value: string) {
@@ -53,13 +48,13 @@ export class User {
     this._lastName = value;
   }
 
-  toPlainObject() {
+  public toPlainObject() {
     return {
-      _id: this._id,
-      _email: this._email,
-      _password: this._password,
-      _firstName: this._firstName,
-      _lastName: this._lastName,
+      id: this._id,
+      email: this._email,
+      password: this._password,
+      firstName: this._firstName,
+      lastName: this._lastName,
     };
   }
 }

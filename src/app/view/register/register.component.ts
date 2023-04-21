@@ -1,14 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { RegisterModelControls } from '../../models/register.model';
+import { User } from '../../models/user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
+  public alerts: string[] = [];
+
   public registerForm: FormGroup;
   public registerFormControls: RegisterModelControls = {
     email: this.formBuilder.nonNullable.control<string>('', Validators.required),
@@ -17,20 +21,37 @@ export class RegisterComponent implements OnInit {
     lastName: this.formBuilder.nonNullable.control<string>('', Validators.required),
   };
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private authService: AuthService
+  ) {
     this.registerForm = this.formBuilder.group(this.registerFormControls);
   }
 
-  ngOnInit(): void {}
-
   submit() {
+    if (!this.registerForm.valid) {
+      return;
+    }
+
+    const user = new User(
+      this.registerFormControls.email.value,
+      this.registerFormControls.password.value,
+      this.registerFormControls.firstName.value,
+      this.registerFormControls.lastName.value
+    );
+
     this.authService
-      .register(this.registerForm.value)
+      .register(user)
       .then(() => {
-        console.log('success');
+        this.router.navigate(['dashboard']);
       })
       .catch(reason => {
-        console.log('err', reason);
+        this.alerts.push(reason);
       });
+  }
+
+  public removeAlert(index: number): void {
+    this.alerts.splice(index, 1);
   }
 }

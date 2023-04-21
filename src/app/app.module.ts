@@ -14,7 +14,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './view/home/home.component';
 import firebase from 'firebase/compat/app';
-import { RouterOutlet } from '@angular/router';
+import { RouterLinkWithHref, RouterOutlet } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 firebase.initializeApp(environment.firebaseConfig);
 
@@ -30,6 +32,10 @@ firebase.initializeApp(environment.firebaseConfig);
     MatButtonModule,
     AppRoutingModule,
     RouterOutlet,
+    MatIconModule,
+    ReactiveFormsModule,
+    FormsModule,
+    RouterLinkWithHref,
   ],
   providers: [],
   bootstrap: [AppComponent],

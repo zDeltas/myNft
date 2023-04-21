@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.form-container {
+  display: flex;
+  width: 400px;
+  flex-direction: column;
+}
+
+.actions-container {
+  display: flex;
+  justify-content: space-between;
+
+  button, a {
+    padding: 0;
+  }
+}
