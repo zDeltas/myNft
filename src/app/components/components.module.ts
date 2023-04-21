@@ -4,10 +4,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { NgIf } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { HeaderComponent } from './header/header.component';
+import { RouterLinkWithHref } from "@angular/router";
 
 @NgModule({
-  declarations: [InputComponent],
-  imports: [ReactiveFormsModule, MatInputModule, NgIf, MatIconModule],
-  exports: [InputComponent],
+  declarations: [InputComponent, HeaderComponent],
+  imports: [ReactiveFormsModule, MatInputModule, NgIf, MatIconModule, RouterLinkWithHref],
+  exports: [InputComponent, HeaderComponent],
 })
 export class SharedModule {}

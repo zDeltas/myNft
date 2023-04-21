@@ -1,0 +1,50 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+  justify-content: center;
+  background-color: #ffffff;
+  width: 100%;
+  z-index: 999;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+li,
+a {
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  list-style: none;
+}
+
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  height: 54px;
+
+  .img-link img {
+    max-height: 40px;
+  }
+
+  .navbar {
+    display: flex;
+
+    li {
+      padding: 0 10px;
+    }
+  }
+
+  .account-container {
+    display: flex;
+    align-items: center;
+
+    a {
+      padding: 0 10px;
+    }
+  }
+}
