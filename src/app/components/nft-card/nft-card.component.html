@@ -1,7 +1,7 @@
 <mat-card class="profile-card" *ngIf="nft">
   <mat-card-header>
     <mat-card-title>{{ nft.name }}</mat-card-title>
-    <mat-card-subtitle>{{ nft.value }}</mat-card-subtitle>
+    <mat-card-subtitle>{{ nft.value }}$</mat-card-subtitle>
     <mat-card-subtitle>{{ nft.rarity }}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
@@ -16,8 +16,11 @@
     </button>
   </mat-card-actions>
   <mat-card-actions align="end" *ngIf="!editable">
-    <button mat-icon-button (click)="buy(nft)" [disabled]="isOwned()">
+    <button mat-icon-button (click)="buy(nft)" [disabled]="isOwned()" *ngIf="!canSell">
       <mat-icon>shopping_cart</mat-icon>
+    </button>
+    <button mat-icon-button (click)="sell(nft)" *ngIf="canSell">
+      <mat-icon>sell</mat-icon>
     </button>
   </mat-card-actions>
 </mat-card>

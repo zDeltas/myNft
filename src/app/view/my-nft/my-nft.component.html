@@ -1,0 +1,8 @@
+<div class="tab-container">
+  <app-nft-card
+    *ngFor="let nft of nftArray"
+    [nft]="nft"
+    (sellNftEvent)="sell($event)"
+    [canSell]="true"
+    class="profile-card"></app-nft-card>
+</div>

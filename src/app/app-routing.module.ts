@@ -9,6 +9,7 @@ import { redirectLoggedInTo, redirectUnauthorizedTo } from "@angular/fire/auth-g
 import { AngularFireAuthGuard } from "@angular/fire/compat/auth-guard";
 import { AdminComponent } from "./view/admin/admin.component";
 import { IsAdminGuardGuard } from "./services/is-admin-guard.guard";
+import { MyNftComponent } from "./view/my-nft/my-nft.component";
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
@@ -31,6 +32,12 @@ const routes: Routes = [
   {
     path: 'my-profile',
     component: MyProfileComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: {authGuardPipe: redirectUnauthorizedToLogin}
+  },
+  {
+    path: 'my-nft',
+    component: MyNftComponent,
     canActivate: [AngularFireAuthGuard],
     data: {authGuardPipe: redirectUnauthorizedToLogin}
   },

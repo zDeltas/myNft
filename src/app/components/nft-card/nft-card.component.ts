@@ -9,10 +9,12 @@ import { Subject } from 'rxjs';
 })
 export class NftCardComponent {
   @Input() public nft: Nft | undefined;
+  @Input() public canSell: boolean = false;
 
   @Output() public editNftEvent: Subject<Nft> = new Subject<Nft>();
   @Output() public deleteNftEvent: Subject<Nft> = new Subject<Nft>();
   @Output() public buyNftEvent: Subject<Nft> = new Subject<Nft>();
+  @Output() public sellNftEvent: Subject<Nft> = new Subject<Nft>();
   @Input() editable: boolean = false;
 
   constructor() {
@@ -27,10 +29,14 @@ export class NftCardComponent {
   }
 
   isOwned(): boolean {
-    return this.nft?.owner == '' || !!this.nft?.owner;
+    return this.nft?.owner != '' || !!this.nft?.owner;
   }
 
   buy(nft: Nft) {
     return this.buyNftEvent.next(nft);
+  }
+
+  sell(nft: Nft) {
+    return this.sellNftEvent.next(nft);
   }
 }

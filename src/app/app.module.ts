@@ -22,6 +22,7 @@ import { MatCardModule } from "@angular/material/card";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { AdminComponent } from './view/admin/admin.component';
 import { MatTabsModule } from "@angular/material/tabs";
+import { MyNftComponent } from './view/my-nft/my-nft.component';
 
 firebase.initializeApp(environment.firebaseConfig);
 
@@ -33,6 +34,7 @@ firebase.initializeApp(environment.firebaseConfig);
     HomeComponent,
     MyProfileComponent,
     AdminComponent,
+    MyNftComponent,
   ],
   imports: [
     BrowserModule,

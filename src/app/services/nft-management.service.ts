@@ -73,4 +73,17 @@ export class NftManagementService {
         .catch(err => reject(err));
     });
   }
+
+  sell(id: string) {
+    return new Promise<void>((resolve, reject) => {
+      this.afs
+        .collection('nft')
+        .doc(id)
+        .update({
+          owner: '',
+        })
+        .then(() => resolve())
+        .catch(err => reject(err));
+    });
+  }
 }
