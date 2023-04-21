@@ -21,6 +21,7 @@ import { MyProfileComponent } from './view/my-profile/my-profile.component';
 import { MatCardModule } from "@angular/material/card";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { AdminComponent } from './view/admin/admin.component';
+import { MatTabsModule } from "@angular/material/tabs";
 
 firebase.initializeApp(environment.firebaseConfig);
 
@@ -49,6 +50,7 @@ firebase.initializeApp(environment.firebaseConfig);
     RouterLinkWithHref,
     MatCardModule,
     MatProgressSpinnerModule,
+    MatTabsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

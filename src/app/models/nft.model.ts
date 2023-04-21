@@ -2,21 +2,17 @@ export class Nft {
   private _id: string | undefined;
   private _imgUrl: string;
   private _value: string;
-  private _nom: string;
-  private _scarcity: string;
+  private _name: string;
+  private _rarity: string;
 
-  constructor(imgUrl: string, value: string, nom: string, scarcity: string) {
+  constructor(name: string, value: string, rarity: string, imgUrl: string) {
     this._imgUrl = imgUrl;
     this._value = value;
-    this._nom = nom;
-    this._scarcity = scarcity;
+    this._name = name;
+    this._rarity = rarity;
   }
 
-  get id(): string | undefined {
-    return this._id;
-  }
-
-  set id(value: string | undefined) {
+  set id(value: string) {
     this._id = value;
   }
 
@@ -36,29 +32,28 @@ export class Nft {
     this._value = value;
   }
 
-  get nom(): string {
-    return this._nom;
+  get name(): string {
+    return this._name;
   }
 
-  set nom(value: string) {
-    this._nom = value;
+  set name(value: string) {
+    this._name = value;
   }
 
-  get scarcity(): string {
-    return this._scarcity;
+  get rarity(): string {
+    return this._rarity;
   }
 
-  set scarcity(value: string) {
-    this._scarcity = value;
+  set rarity(value: string) {
+    this._rarity = value;
   }
 
   public toPlainObject() {
     return {
-      id: this._id,
       imgUrl: this._imgUrl,
       value: this._value,
-      nom: this._nom,
-      scarcity: this._scarcity,
+      name: this._name,
+      rarity: this._rarity,
     };
   }
 }
