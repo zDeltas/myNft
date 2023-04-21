@@ -3,29 +3,36 @@ import { User } from '../models/user.model';
 import firebase from 'firebase/compat/app';
 import { BehaviorSubject } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private isLogged = new BehaviorSubject<boolean>(false);
-  public $isLoggedObservable = this.isLogged.asObservable();
+  public $isLogged = this.isLogged.asObservable();
 
   token: BehaviorSubject<string | null>;
 
-  constructor(private afs: AngularFirestore) {
+  constructor(private afs: AngularFirestore, private afa: AngularFireAuth) {
     this.token = new BehaviorSubject<string | null>(null);
+
+    this.afa.onAuthStateChanged(user => {
+      if (user) {
+        this.isLogged.next(true);
+      } else {
+        this.isLogged.next(false);
+      }
+    });
   }
 
   register(newUser: User) {
     return new Promise<void>((resolve, reject) => {
-      firebase
-        .auth()
+      this.afa
         .createUserWithEmailAndPassword(newUser.email, newUser.password)
         .then(currentUser => {
           this.token.next(currentUser.user!.refreshToken);
           newUser.id = currentUser.user!.uid;
-          this.isLogged.next(true);
           this.afs
             .collection('users')
             .doc(currentUser.user!.uid)
@@ -54,31 +61,43 @@ export class AuthService {
     return new Promise<void>((resolve, reject) => {
       firebase
         .auth()
-        .signInWithEmailAndPassword(email, password)
-        .then(currentUser => {
-          this.token.next(currentUser.user!.refreshToken);
-          this.isLogged.next(true);
-          resolve();
-        })
-        .catch(reason => {
-          if (reason.code === 'auth/invalid-email') {
-            reject("L'adresse email est invalide.");
-          }
+        .setPersistence(firebase.auth.Auth.Persistence.SESSION)
+        .then(() => {
+          this.afa
+            .signInWithEmailAndPassword(email, password)
+            .then(currentUser => {
+              this.token.next(currentUser.user!.refreshToken);
+              resolve();
+            })
+            .catch(reason => {
+              if (reason.code === 'auth/invalid-email') {
+                reject("L'adresse email est invalide.");
+              }
 
-          if (reason.code === 'auth/user-disabled') {
-            reject("L'utilisateur a été banni.");
-          }
+              if (reason.code === 'auth/user-disabled') {
+                reject("L'utilisateur a été banni.");
+              }
 
-          if (reason.code === 'auth/user-not-found') {
-            reject("L'utilisateur n'existe pas.");
-          }
+              if (reason.code === 'auth/user-not-found') {
+                reject("L'utilisateur n'existe pas.");
+              }
 
-          if (reason.code === 'auth/wrong-password') {
-            reject('Le mot de passe est incorrect.');
-          }
+              if (reason.code === 'auth/wrong-password') {
+                reject('Le mot de passe est incorrect.');
+              }
 
-          reject('Une erreur est survenu');
+              reject('Une erreur est survenu');
+            });
         });
+    });
+  }
+
+  logout() {
+    return new Promise<void>((resolve, reject) => {
+      this.afa.signOut().then(() => {
+        this.token.next(null);
+        resolve();
+      });
     });
   }
 }

@@ -1,0 +1,14 @@
+<ng-container *ngIf="this.authService.$isLogged | async; else loginRegister">
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="profile()">Voir mon profil</button>
+    <button mat-menu-item (click)="logout()">Se deconnecter</button>
+  </mat-menu>
+</ng-container>
+
+<ng-template #loginRegister>
+  <button mat-button routerLink="register">Sign up</button>
+  <button mat-button routerLink="login">Log in</button>
+</ng-template>
