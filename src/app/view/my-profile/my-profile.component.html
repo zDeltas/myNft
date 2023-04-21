@@ -1,0 +1,14 @@
+<div class="container">
+    <div *ngIf="this.isLoading" class="spinner"></div>
+
+  <mat-card class="profile-card" *ngIf="currentUser">
+    <mat-card-header>
+      <div mat-card-avatar class="avatar"></div>
+      <mat-card-title> {{currentUser.lastName}}</mat-card-title>
+      <mat-card-subtitle>{{currentUser.firstName}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+    </mat-card-content>
+  </mat-card>
+</div>
+

@@ -17,11 +17,20 @@ import firebase from 'firebase/compat/app';
 import { RouterLinkWithHref, RouterOutlet } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MyProfileComponent } from './view/my-profile/my-profile.component';
+import { MatCardModule } from "@angular/material/card";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 firebase.initializeApp(environment.firebaseConfig);
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, RegisterComponent, HomeComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    RegisterComponent,
+    HomeComponent,
+    MyProfileComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -36,6 +45,8 @@ firebase.initializeApp(environment.firebaseConfig);
     ReactiveFormsModule,
     FormsModule,
     RouterLinkWithHref,
+    MatCardModule,
+    MatProgressSpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

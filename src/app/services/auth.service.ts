@@ -11,6 +11,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 export class AuthService {
   private isLogged = new BehaviorSubject<boolean>(false);
   public $isLogged = this.isLogged.asObservable();
+  public currentUser: firebase.User | null = null;
 
   token: BehaviorSubject<string | null>;
 
@@ -19,8 +20,10 @@ export class AuthService {
 
     this.afa.onAuthStateChanged(user => {
       if (user) {
+        this.currentUser = user;
         this.isLogged.next(true);
       } else {
+        this.currentUser = null;
         this.isLogged.next(false);
       }
     });
@@ -33,6 +36,7 @@ export class AuthService {
         .then(currentUser => {
           this.token.next(currentUser.user!.refreshToken);
           newUser.id = currentUser.user!.uid;
+          this.currentUser = currentUser.user;
           this.afs
             .collection('users')
             .doc(currentUser.user!.uid)
@@ -67,6 +71,7 @@ export class AuthService {
             .signInWithEmailAndPassword(email, password)
             .then(currentUser => {
               this.token.next(currentUser.user!.refreshToken);
+              this.currentUser = currentUser.user;
               resolve();
             })
             .catch(reason => {
@@ -96,6 +101,7 @@ export class AuthService {
     return new Promise<void>((resolve, reject) => {
       this.afa.signOut().then(() => {
         this.token.next(null);
+        this.currentUser = null;
         resolve();
       });
     });

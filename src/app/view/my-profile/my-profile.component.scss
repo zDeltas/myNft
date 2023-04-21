@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  justify-content: center;
+  padding-top: 22px;
+
+  .profile-card {
+    max-width: 400px;
+  }
+
+  .avatar {
+    background-image: url('https://static.vecteezy.com/system/resources/previews/011/675/382/original/man-avatar-image-for-profile-png.png');
+    background-size: cover;
+  }
+}
+
+

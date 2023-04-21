@@ -16,6 +16,6 @@ export class AccountComponent {
   }
 
   profile() {
-
+    this.router.navigate(['my-profile']);
   }
 }
