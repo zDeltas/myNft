@@ -8,43 +8,24 @@
         Créer un NFT
       </button>
       <div class="tab-container">
-        <mat-card class="profile-card" *ngFor="let nft of nfts">
-          <mat-card-header>
-            <mat-card-title>{{ nft.name }}</mat-card-title>
-            <mat-card-subtitle>{{ nft.value }}</mat-card-subtitle>
-            <mat-card-subtitle>{{ nft.rarity }}</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content>
-            <img [src]="nft.imgUrl" alt="img nft">
-          </mat-card-content>
-          <mat-card-actions align="end">
-            <button mat-icon-button (click)="editNft(nft)">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-icon-button (click)="deleteNft(nft)">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </mat-card-actions>
-        </mat-card>
+        <app-nft-card
+          *ngFor="let nft of nftArray"
+          [nft]="nft"
+          [editable]="true"
+          (deleteNftEvent)="deleteNft($event)"
+          (editNftEvent)="editNft($event)"
+          class="profile-card"></app-nft-card>
       </div>
     </mat-tab>
     <mat-tab label="Utilisateurs" class="test">
       <div class="tab-container">
-        <mat-card class="profile-card" *ngFor="let user of users">
-          <mat-card-header>
-            <div mat-card-avatar class="avatar"></div>
-            <mat-card-title>{{ user.lastName }}</mat-card-title>
-            <mat-card-subtitle>{{ user.firstName }}</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-actions align="end">
-            <button mat-icon-button (click)="editUser(user)">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-icon-button (click)="deleteUser(user)">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </mat-card-actions>
-        </mat-card>
+        <app-user-card
+          *ngFor="let user of users"
+          [user]="user"
+          [editable]="true"
+          (deleteUserEvent)="deleteUser($event)"
+          (editUserEvent)="editUser($event)"
+          class="profile-card"></app-user-card>
       </div>
     </mat-tab>
   </mat-tab-group>

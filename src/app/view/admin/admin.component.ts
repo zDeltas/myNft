@@ -16,7 +16,7 @@ import { EditNftModel, EditNftModelControls } from "../../models/edit-nft.model"
 export class AdminComponent implements OnInit {
   public isLoading: boolean = false;
   public users: User[] | undefined;
-  public nfts: Nft[] | undefined;
+  public nftArray: Nft[] | undefined;
 
   constructor(
     private dialog: MatDialog,
@@ -32,7 +32,7 @@ export class AdminComponent implements OnInit {
     });
 
     this.nftManagementService.nfts.subscribe(value => {
-      this.nfts = value;
+      this.nftArray = value;
       this.isLoading = false;
     });
 
@@ -65,7 +65,7 @@ export class AdminComponent implements OnInit {
       .pipe()
       .subscribe((value: EditNftModel) => {
         if (value) {
-          const nft = new Nft(value.name, value.value, value.rarity, value.imgUrl);
+          const nft = new Nft(value.name, value.value, value.rarity, value.imgUrl, '');
           this.nftManagementService.create(nft);
         }
       });

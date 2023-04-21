@@ -27,7 +27,6 @@ export class EditNftDialogComponent {
   ) {
     this.editNftForm = this.formBuilder.group(this.editNftFormControls);
 
-    console.log(data);
     if (data) {
       this.title = 'Editer';
       this.editNftForm.setValue({

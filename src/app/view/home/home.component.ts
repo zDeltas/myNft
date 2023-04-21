@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { NftManagementService } from '../../services/nft-management.service';
+import { Nft } from '../../models/nft.model';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -6,44 +10,30 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  constructor() {}
+  public isLoading: boolean = false;
+  public nftArray: Nft[] | undefined;
+
+  constructor(
+    private dialog: MatDialog,
+    private nftManagementService: NftManagementService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
+    this.isLoading = true;
 
-    // this.nft = [{
-    //   _id: 1,
-    //   _imgUrl: 'https://example.com/nft-car-1.jpg',
-    //   _value: 100000,
-    //   _nom: 'CryptoPorsche #001',
-    //   _rarity: 'Rare'
-    // },
-    //   {
-    //     _id: 2,
-    //     _imgUrl: 'https://example.com/nft-car-2.jpg',
-    //     _value: 200000,
-    //     _nom: 'CryptoLambo #001',
-    //     _rarity: 'Unique'
-    //   },
-    //   {
-    //     _id: 3,
-    //     _imgUrl: 'https://example.com/nft-car-3.jpg',
-    //     _value: 50000,
-    //     _nom: 'CryptoBugatti #001',
-    //     _rarity: 'Legendary'
-    //   },
-    //   {
-    //     _id: 4,
-    //     _imgUrl: 'https://example.com/nft-car-4.jpg',
-    //     _value: 250000,
-    //     _nom: 'CryptoFerrari #001',
-    //     _rarity: 'Epic'
-    //   },
-    //   {
-    //     _id: 5,
-    //     _imgUrl: 'https://example.com/nft-car-5.jpg',
-    //     _value: 150000,
-    //     _nom: 'CryptoMcLaren #001',
-    //     _rarity: 'Rare'
-    //   }]
+    this.nftManagementService.nfts.subscribe(value => {
+      this.nftArray = value;
+      this.isLoading = false;
+    });
+
+    this.nftManagementService.getAllNft();
+    console.log(this.nftArray);
+  }
+
+  buyNft($event: Nft) {
+    if (this.authService.currentUser?.uid) {
+      this.nftManagementService.buy($event.id, this.authService.currentUser?.uid);
+    }
   }
 }

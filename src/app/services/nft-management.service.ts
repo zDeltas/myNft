@@ -9,6 +9,7 @@ import { EditNftModel } from '../models/edit-nft.model';
 })
 export class NftManagementService {
   nfts: ReplaySubject<Array<Nft>> = new ReplaySubject<Array<Nft>>();
+
   constructor(private afs: AngularFirestore) {}
 
   public getAllNft() {
@@ -55,6 +56,19 @@ export class NftManagementService {
         .collection('nft')
         .doc(id)
         .delete()
+        .then(() => resolve())
+        .catch(err => reject(err));
+    });
+  }
+
+  buy(id: string, uid: string) {
+    return new Promise<void>((resolve, reject) => {
+      this.afs
+        .collection('nft')
+        .doc(id)
+        .update({
+          owner: uid,
+        })
         .then(() => resolve())
         .catch(err => reject(err));
     });

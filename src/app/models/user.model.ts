@@ -5,13 +5,15 @@ export class User {
   private _firstName: string;
   private _lastName: string;
   private _isAdmin: boolean;
+  private _money: number;
 
-  constructor(email: string, password: string, firstName: string, lastName: string, _isAdmin: boolean) {
+  constructor(email: string, password: string, firstName: string, lastName: string, isAdmin: boolean, money: number) {
     this._email = email;
     this._password = password;
     this._firstName = firstName;
     this._lastName = lastName;
-    this._isAdmin = _isAdmin;
+    this._isAdmin = isAdmin;
+    this._money = money;
   }
 
   set id(value: string) {
@@ -59,6 +61,14 @@ export class User {
     this._isAdmin = value;
   }
 
+  get money(): number {
+    return this._money;
+  }
+
+  set money(value: number) {
+    this._money = value;
+  }
+
   public toPlainObject() {
     return {
       id: this._id,
@@ -66,6 +76,7 @@ export class User {
       firstName: this._firstName,
       lastName: this._lastName,
       isAdmin: this._isAdmin,
+      money: this._money
     };
   }
 }

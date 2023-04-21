@@ -4,12 +4,14 @@ export class Nft {
   private _value: string;
   private _name: string;
   private _rarity: string;
+  private _owner: string;
 
-  constructor(name: string, value: string, rarity: string, imgUrl: string) {
+  constructor(name: string, value: string, rarity: string, imgUrl: string, owner: string) {
     this._imgUrl = imgUrl;
     this._value = value;
     this._name = name;
     this._rarity = rarity;
+    this._owner = owner;
   }
 
   set id(value: string) {
@@ -19,6 +21,7 @@ export class Nft {
   get imgUrl(): string {
     return this._imgUrl;
   }
+
 
   set imgUrl(value: string) {
     this._imgUrl = value;
@@ -47,6 +50,13 @@ export class Nft {
   set rarity(value: string) {
     this._rarity = value;
   }
+  set owner(value: string) {
+    this._owner = value;
+  }
+
+  get owner(): string {
+    return this._owner;
+  }
 
   public toPlainObject() {
     return {
@@ -54,6 +64,7 @@ export class Nft {
       value: this._value,
       name: this._name,
       rarity: this._rarity,
+      owner: this._owner,
     };
   }
 }

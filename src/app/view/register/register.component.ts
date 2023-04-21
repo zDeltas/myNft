@@ -39,7 +39,8 @@ export class RegisterComponent {
       this.registerFormControls.password.value,
       this.registerFormControls.firstName.value,
       this.registerFormControls.lastName.value,
-      false
+      false,
+      200000
     );
 
     this.authService

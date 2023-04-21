@@ -13,6 +13,9 @@ import { EditUserDialogComponent } from './edit-user-dialog/edit-user-dialog.com
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { EditNftDialogComponent } from './edit-nft-dialog/edit-nft-dialog.component';
+import { NftCardComponent } from './nft-card/nft-card.component';
+import { MatCardModule } from "@angular/material/card";
+import { UserCardComponent } from './user-card/user-card.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +24,8 @@ import { EditNftDialogComponent } from './edit-nft-dialog/edit-nft-dialog.compon
     AccountComponent,
     EditUserDialogComponent,
     EditNftDialogComponent,
+    NftCardComponent,
+    UserCardComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -35,7 +40,8 @@ import { EditNftDialogComponent } from './edit-nft-dialog/edit-nft-dialog.compon
     MatDialogModule,
     MatCheckboxModule,
     FormsModule,
+    MatCardModule,
   ],
-  exports: [InputComponent, HeaderComponent],
+  exports: [InputComponent, HeaderComponent, NftCardComponent, UserCardComponent],
 })
 export class SharedModule {}
