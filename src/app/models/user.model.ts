@@ -3,7 +3,7 @@ export class User {
   private _email: string;
   private _password: string;
   private _firstName: string;
-  private _lastName: string
+  private _lastName: string;
 
   constructor(id: string, email: string, password: string, firstName: string, lastName: string) {
     this._id = id;
@@ -60,6 +60,6 @@ export class User {
       _password: this._password,
       _firstName: this._firstName,
       _lastName: this._lastName,
-    }
+    };
   }
 }

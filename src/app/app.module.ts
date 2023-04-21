@@ -1,30 +1,25 @@
-import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 
-import {AppComponent} from './app.component';
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {AngularFireModule} from "@angular/fire/compat";
-import {environment} from "../environments/environment";
-import {AngularFireStorageModule} from "@angular/fire/compat/storage";
-import {AngularFireAuthModule} from "@angular/fire/compat/auth";
+import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularFireModule } from '@angular/fire/compat';
+import { environment } from '../environments/environment';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { LoginComponent } from './view/login/login.component';
 import { RegisterComponent } from './view/register/register.component';
-import {SharedModule} from "./components/components.module";
-import {MatButtonModule} from "@angular/material/button";
+import { SharedModule } from './components/components.module';
+import { MatButtonModule } from '@angular/material/button';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './view/home/home.component';
-import firebase from "firebase/compat/app";
-import {RouterOutlet} from "@angular/router";
+import firebase from 'firebase/compat/app';
+import { RouterOutlet } from '@angular/router';
 
 firebase.initializeApp(environment.firebaseConfig);
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    RegisterComponent,
-    HomeComponent,
-  ],
+  declarations: [AppComponent, LoginComponent, RegisterComponent, HomeComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -34,10 +29,9 @@ firebase.initializeApp(environment.firebaseConfig);
     SharedModule,
     MatButtonModule,
     AppRoutingModule,
-    RouterOutlet
+    RouterOutlet,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}
